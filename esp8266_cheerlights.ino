@@ -62,7 +62,7 @@ PubSubClient client(espClient);
 const int MAX_MSG_LEN = 50;
 const int MAX_MSG_PARAMS = 10;
 long lastMsg = 0;
-char msg[MAX_MSG_LEN];
+char msg[MAX_MSG_LEN+1];
 int value = 0;
 
 
@@ -205,7 +205,7 @@ void loop()
   if (now - lastMsg > 10000) {
     lastMsg = now;
     ++value;
-    snprintf (msg, 75, "hello world #%ld", value);
+    snprintf (msg, MAX_MSG_LEN, "hello world #%ld", value);
     Serial.print("Publish message: ");
     Serial.println(msg);
     client.publish(OUTTOPIC, msg);
